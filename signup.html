@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Signin to TestParse</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <!-- Get Parse -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.19.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Sign Up page begins here -->
+      <div class="signUp_container">
+        <form class="form-signin" role="form">
+          <h2 class="form-signin-heading">SignUp</h2>
+          <input class="form-control" placeholder="User Name" id="username" required="" autofocus="">
+          <input class="form-control" placeholder="Email address" id="email" required="" autofocus="" type="email">
+          <input class="form-control" placeholder="Password" id="password" required="" type="password">
+          <button id="signup" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        </form>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- TestApp core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+    Parse.initialize("6AjYsV499n0HKWSI6GFcH5U5f5KFGMHeHctsVLZP", "1SrAvY5wnhOW8YYyy54DkhNlWryNY2uYNJoNrzq3");
+
+    $("#signup").on('click', function(e){
+    	e.preventDefault();
+    	signup();
+    });
+    
+
+    var signup = function(){
+    	
+    	var username = $("#username").val();
+    	var email = $("#email").val();
+    	var password = $("#password").val();
+
+    	var user = new Parse.User();
+    	var user_data = {
+				username: username,
+				email: email,
+				password: password
+			}
+
+		console.log(user_data);
+
+		user.signUp(user_data
+			, {
+		  success: function(user) {
+		    // Hooray! Let them use the app now.
+		    alert("new user created");
+		  },
+		  error: function(user, error) {
+		    // Show the error message somewhere and let the user try again.
+		    alert("Error: " + error.code + " " + error.message);
+		  }
+		});
+
+
+    }
+  </script>
+
+</body>
+</html>
